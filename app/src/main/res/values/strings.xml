@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HTTP测试</string>
+    <string name="xuehao">学号:</string>
+    <string name="mima">密码:</string>
+    <string name="ok">确 定</string>
+    <string name="xh_tishi">请输入学号</string>
+    <string name="mm_tishi">请输入密码</string>
+</resources>
