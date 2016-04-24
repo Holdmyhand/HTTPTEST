@@ -1,11 +1,14 @@
 package com.httpget.test;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,13 +23,17 @@ public class MainActivity extends Activity {
 	Button ok;
 	TextView xianshi;
 	EditText xuehao,mima;
+	CheckBox jz;
+	SharedPreferences pref;
+	SharedPreferences.Editor editor;
+	boolean sfjz;
 
 	private Handler hander = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case SHOW_RESPONSE:
-					String response = (String) msg.obj;
-					xianshi.setText(response);
+					String shuchuliu = (String) msg.obj;
+					xianshi.setText(shuchuliu);
 			}
 		}
 	};
@@ -40,15 +47,47 @@ public class MainActivity extends Activity {
 		xianshi = (TextView) findViewById(R.id.tv_1);
 		xuehao = (EditText) findViewById(R.id.xuehao0);
 		mima = (EditText) findViewById(R.id.mima0);
+		jz = (CheckBox) findViewById(R.id.ck);
+		pref = PreferenceManager.getDefaultSharedPreferences(this);
+		sfjz = pref.getBoolean("jz", false);
+
+		if (sfjz) {
+			String x = pref.getString("xuehao", "");
+			String m = pref.getString("mima", "");
+			xuehao.setText(x);
+			mima.setText(m);
+			jz.setChecked(true);
+		}
+
 
 
 
 		ok.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (v.getId() == R.id.btn_1) {
-					kaishi();
+
+				String x = xuehao.getText().toString();
+				String m = mima.getText().toString();
+				/*if ( ){
+					Toast.makeText(MainActivity.this, "请输入学号", Toast.LENGTH_SHORT).show();
+				}*/
+				if (!(xuehao.equals(null) && mima.equals(null))) {
+					editor = pref.edit();
+					if (jz.isChecked()) {
+						editor.putBoolean("jz", true);
+						editor.putString("xuehao", x);
+						editor.putString("mima", m);
+					} else {
+						editor.clear();
+					}
+					editor.commit();
+					if (v.getId() == R.id.btn_1) {
+						kaishi();
+					}
 				}
+
+				/*Intent intent = new Intent(MainActivity.this, Sec.class);
+				startActivity(intent);*/
 			}
 		});
 	}
@@ -85,3 +124,4 @@ public class MainActivity extends Activity {
 		}).start();
 	}
 }
+

@@ -9,17 +9,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.httpget.test.MainActivity">
-	
-	<Button
-        android:id="@+id/btn_1"
-        android:text="@string/ok"
-        android:textSize="@dimen/haihao"
+
+    <LinearLayout
+        android:id="@+id/L"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_1"
+            android:text="@string/ok"
+            android:layout_gravity="center"
+            android:textSize="@dimen/haihao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <CheckBox
+            android:id="@+id/ck"
+            android:text="@string/jizhu"
+            android:textSize="@dimen/haihao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/L_2"
-        android:layout_above="@id/btn_1"
+        android:layout_above="@id/L"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -32,6 +48,7 @@
         <EditText
             android:id="@+id/mima0"
             android:hint="@string/mm_tishi"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -55,7 +72,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <ScrollView
-        android:layout_below="@id/btn_1"
+        android:layout_below="@id/L"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
